@@ -1,0 +1,10 @@
+.messages__item{ "data-message-id": "#{message.id}"}
+  .userName
+    = message.user.name
+  .sentTime
+    = message.created_at
+  .text
+    = message.text if message.text.present?
+  .image
+    = image_tag message.image.url if message.image.present?
+

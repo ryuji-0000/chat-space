@@ -1,0 +1,36 @@
+= form_for group, html: {class: 'edit_chat_group', id: 'edit_chat_group_group.id'} do |f|
+  - if group.errors.any?
+    .chat-group-form__errors
+      %h2= "#{group.errors.full_messages.count}件のエラーが発生しました。"
+      %ul
+        - group.errors.full_messages.each do |message|
+          %li= message
+      / %form#edit_chat_group_22.edit_chat_group{"accept-charset" => "UTF-8", :action => "/chat_groups/22", :method => "post"}
+  .chat-group-form__field.clearfix
+    .chat-group-form__field--left
+      = f.label "グループ名", class: "chat-group-form__label", for: "chat_group_name"
+    .chat-group-form__field--right
+      = f.text_field :name, placeholder: group.name, id: 'chat_group_name', class: 'chat-group-form__input'
+  .chat-group-form__field.clearfix
+    .chat-group-form__field--left
+      = label_tag "keyword", "チャットメンバーを追加", class: "chat-group-form__label", for: "user-search-field"
+    .chat-group-form__field--right
+      / グループ作成機能collection_check_boxesを使用した場合
+      / = f.collection_check_boxes :user_ids, User.all, :id, :name
+      .chat-group-form__search.clearfix
+        = text_field_tag "keyword", "", class: "chat-group-form__input", id: "user-search-field", placeholder: "追加したいユーザー名を入力してください"
+      #user-search-result
+  .chat-group-form__field.clearfix
+    .chat-group-form__field--left
+      = label_tag "", "チャットメンバー", class: "chat-group-form__label"
+    .chat-group-form__field--right
+      #group-user
+        .chat-group-user.clearfix.js-chat-member
+          = hidden_field_tag 'group[user_ids][]', current_user.id
+          %p.chat-group-user__name
+            = current_user.name
+  .chat-group-form__field.clearfix
+    .chat-group-form__field--left
+    .chat-group-form__field--right
+      = f.submit "Save", class: "chat-group-form__action-btn", "data-disable-with" => "Save", name: nil
+      / %input.chat-group-form__action-btn{"data-disable-with" => "Save", :name => "commit", :type => "submit", :value => "Save"}/

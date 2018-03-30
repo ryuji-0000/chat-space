@@ -1,0 +1,22 @@
+.groupHeader
+  .groupHeader__groupName
+    = @group.name
+  .groupHeader__groupMember
+    Member :
+    - @group.users.each do |user|
+      = user.name
+  .groupHeader__groupEdit
+    = link_to 'Edit', edit_group_path(@group)
+.messages
+  = render @messages
+.submit
+  .submit__form
+    = form_for [@group, @message], multipart: true, id: "new_message" do |f|
+      .submit__form__inputArea
+        = f.text_field :text, class: 'submit__form__inputArea__text', placeholder: "Type a message"
+        .submit__form__inputArea__image
+          = f.label :image do
+            = icon('image')
+            = f.file_field :image, class: 'submit__form__inputArea__image__file'
+      .submit__form__sendButton
+        = f.submit 'Send', id: 'sendButton'

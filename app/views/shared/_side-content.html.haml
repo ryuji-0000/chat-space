@@ -1,0 +1,16 @@
+.myStatus
+  .myStatus__userName
+    = current_user.name
+  = link_to new_group_path do
+    = icon('edit', class: 'myStatus__createGroup')
+  = link_to edit_user_path(current_user.id) do
+    = icon('cog', class: 'myStatus__editAccount')
+.groups
+  %ul.groups__list
+    - current_user.groups.each do |group|
+      = link_to group_messages_path(group) do
+        %li.groups__list__item
+          .groups__list__item__groupName
+            = group.name
+          .groups__list__item__latestMessage
+            = group.show_last_message
