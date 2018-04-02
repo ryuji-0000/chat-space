@@ -2,8 +2,8 @@ set :linked_files, %w{ config/secrets.yml }
 # config valid for current version and patch releases of Capistrano
 lock "~> 3.10.1"
 
-set :application, 'chat_space'
-set :repo_url,  'git@github.com:ryuji-0000/chat_space.git'
+set :application, 'chat-space'
+set :repo_url,  'git@github.com:ryuji-0000/chat-space.git'
 
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/uploads')
 
@@ -11,7 +11,7 @@ set :rbenv_type, :user
 set :rbenv_ruby, '2.3.1'
 
 set :ssh_options, auth_methods: ['publickey'],
-                  keys: ['/Users/tanakaryuji/.ssh/ryuji0530.pem']
+                  keys: ['/Users/tanakaryuji/.ssh/jz8JRQG3.pem']
 
 set :unicorn_pid, -> { "#{shared_path}/tmp/pids/unicorn.pid" }
 set :unicorn_config_path, -> { "#{current_path}/config/unicorn.rb" }
